@@ -44,6 +44,7 @@ hbs.registerHelper('block', function(name) {
 });
 
 app.get('/login', function(req, res){
+    console.log("login()");
     res.render('login', {title:'123', body:'abc'});
 });
 
@@ -83,17 +84,7 @@ app.post('/', function(req, res){
 app.listen(8000);
 
 
-
-
-
-
 /*
-// POST /login gets urlencoded bodies
-app.post('/login', urlencodedParser, function (req, res) {
-  if (!req.body) return res.sendStatus(400)
-  res.send('welcome, ' + req.body.username)
-})
-
 // POST /api/users gets JSON bodies
 app.post('/api/users', jsonParser, function (req, res) {
   if (!req.body) return res.sendStatus(400)
