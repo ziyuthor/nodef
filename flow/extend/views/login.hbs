@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+div.container {width:100%; height:100%; margin:0px; border:1px solid gray; line-height:150%;}
+div.header,div.footer {padding:0.5em; color:white; background-color:gray; clear:left;}
+h1.header{padding:0;margin:0;}
+div.left{float:left;width:70%;height:80%;margin:0;padding:1em;}
+div.content{margin-left:70%;border-left:1px solid gray;padding:1em;}
+div.space{height:50%;}
+logininfo{width:60px;display:block}
+table{ border:none;}
+</style>
+</head>
+<body>
+
+<div class="container">
+<div class="header"><h1 class="header">登陆</h1></div>
+<div class="left"><p>"Never increase, beyond what is necessary, the number of entities required to explain anything." William of Ockham (1285-1349)</p></div>
+<div class="content">
+<div class="space"></div>
+<!--
+<table class="table">
+<tr>
+<td>用户名:</td>
+<td><input> </input></td>
+</tr>
+<tr>
+<td>密  码:</td>
+<td><input> </input></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" method="post" name="login" value="登陆"></td>
+</tr>
+</table>
+-->
+
+<!--
+<div class="logininfo">用户名:</div>
+<input> </input><br>
+<div class="logininfo">密码:</div>
+<input> </input><br>
+<input type="submit" name="login" value="登陆">
+-->
+<form action="/login" method="post">
+用户名:<input> </input><br>
+密  码:<input> </input>
+<input type="submit" value="登陆">
+</form>
+</div>
+<div class="footer">Copyright 2015 by UT.</div>
+</div>
+
+</body>
+</html>
