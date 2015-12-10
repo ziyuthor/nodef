@@ -39,16 +39,16 @@ app.get('/login', function(req, res){
     res.render('login', {title:'123', body:'abc'});
 });
 app.post('/login', function(req, res){
-	console.log(req.body);
+    console.log(req.body);
 
-	if (req.body != null)
-	{
-		res.render('index', {title:'123', body:'abc'});
-	}
-	else
-	{
-		
-	}
+    if (req.body != null)
+    {
+        res.render('index', {title:'123', body:'abc'});
+    }
+    else
+    {
+        
+    }
 });
 
 app.post('/', function(req, res){
