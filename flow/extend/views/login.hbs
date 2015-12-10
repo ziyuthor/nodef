@@ -43,9 +43,11 @@ table{ border:none;}
 <input type="submit" name="login" value="登陆">
 -->
 <form action="/login" method="post">
-用户名:<input> </input><br>
-密  码:<input> </input>
-<input type="submit" value="登陆">
+<table>
+<tr><td style="text-align:justify;text-justify:distribute-all-lines">用户名:</td> <td><input name="uname" id="uname"></input></td></tr>
+<tr><td style="text-align:justify;text-justify:distribute-all-lines">密码:</td> <td><input name="passwd" id="passwd"></input></td></tr>
+<tr><td></td> <td align="right"><input type="submit" value="登陆"></input></td></tr>
+</table>
 </form>
 </div>
 <div class="footer">Copyright 2015 by UT.</div>
