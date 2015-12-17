@@ -60,6 +60,23 @@ var menuroot = [
         ]
     },
     {
+        "name": "企业管理",
+        "submenu": [
+        {
+            "name": "企业查询",
+            "url": ""
+        },
+        {
+            "name": "新建企业信息",
+            "url": ""
+        },
+        {
+            "name": "企业信息修改",
+            "url": ""
+        }
+        ]
+    },
+    {
         "name": "产品管理",
         "submenu": [
         {
@@ -107,6 +124,23 @@ var menuroot = [
         {
             "name": "通道调整",
             "url": "http://www.baidu.com"
+        }
+        ]
+    },
+    {
+        "name": "用户管理",
+        "submenu": [
+        {
+            "name": "用户查询",
+            "url": ""
+        },
+        {
+            "name": "添加用户",
+            "url": ""
+        },
+        {
+            "name": "删除用户",
+            "url": ""
         }
         ]
     }
