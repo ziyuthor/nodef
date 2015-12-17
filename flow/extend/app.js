@@ -25,97 +25,87 @@ var hour = 20000; // 20s
 
 var menuroot = [
     {
-        "name": "一级菜单",
+        "name": "信息管理",
         "submenu": [
         {
-            "name": "二级菜单",
+            "name": "系统信息",
             "url": ""
         },
         {
-            "name": "二级菜单",
+            "name": "账户信息",
             "url": ""
         }
         ]
     },
     {
-        "name": "一级菜单",
+        "name": "流量充值",
         "submenu": [
         {
-            "name": "二级菜单",
+            "name": "单个充值",
             "url": ""
         },
         {
-            "name": "二级菜单",
-            "submenu": [
-            {
-                "name": "三级菜单",
-                "submenu": [
-                {
-                    "name": "四级菜单",
-                    "url": ""
-                }
-                ]
-            },
-            {
-                "name": "三级菜单",
-                "url": ""
-            }
-            ]
-        },
-        {
-            "name": "二级菜单",
-            "url": ""
-        },
-        {
-            "name": "二级菜单",
-            "submenu": [
-            {
-                "name": "三级菜单",
-                "submenu": [
-                {
-                    "name": "四级菜单",
-                    "url": ""
-                },
-                {
-                    "name": "四级菜单",
-                    "submenu": [
-                    {
-                        "name": "五级菜单",
-                        "url": ""
-                    },
-                    {
-                        "name": "五级菜单",
-                        "url": ""
-                    }
-                    ]
-                }
-                ]
-            },
-            {
-                "name": "三级菜单",
-                "url": ""
-            }
-            ]
-        },
-        {
-            "name": "二级菜单",
+            "name": "批量充值",
             "url": ""
         }
         ]
     },
     {
-        "name": "一级菜单",
+        "name": "任务管理",
         "submenu": [
         {
-            "name": "二级菜单",
+            "name": "订单查询",
+            "url": ""
+        }
+        ]
+    },
+    {
+        "name": "产品管理",
+        "submenu": [
+        {
+            "name": "产品信息",
             "url": ""
         },
         {
-            "name": "二级菜单",
+            "name": "产品添加",
             "url": ""
         },
         {
-            "name": "百度",
+            "name": "产品调整",
+            "url": ""
+        }
+        ]
+    },
+    {
+        "name": "流量包管理",
+        "submenu": [
+        {
+            "name": "流量包查询",
+            "url": ""
+        },
+        {
+            "name": "新增流量包",
+            "url": ""
+        },
+        {
+            "name": "流量包调整",
+            "url": "http://www.baidu.com"
+        }
+        ]
+    },
+    {
+        "name": "通道管理",
+        "submenu": [
+        {
+            "name": "通道查询",
+            "url": ""
+        },
+        {
+            "name": "新增通道",
+            "url": ""
+        },
+        {
+            "name": "通道调整",
             "url": "http://www.baidu.com"
         }
         ]
