@@ -20,8 +20,108 @@ var parseurl = require('parseurl');
 var session = require('express-session');
 
 var redis = require("redis");
-var client = redis.createClient(6380, "192.168.3.254");
+var client = redis.createClient(6380, "127.0.0.1");
 var hour = 20000; // 20s
+
+var menuroot = [
+    {
+        "name": "一级菜单",
+        "submenu": [
+        {
+            "name": "二级菜单",
+            "url": ""
+        },
+        {
+            "name": "二级菜单",
+            "url": ""
+        }
+        ]
+    },
+    {
+        "name": "一级菜单",
+        "submenu": [
+        {
+            "name": "二级菜单",
+            "url": ""
+        },
+        {
+            "name": "二级菜单",
+            "submenu": [
+            {
+                "name": "三级菜单",
+                "submenu": [
+                {
+                    "name": "四级菜单",
+                    "url": ""
+                }
+                ]
+            },
+            {
+                "name": "三级菜单",
+                "url": ""
+            }
+            ]
+        },
+        {
+            "name": "二级菜单",
+            "url": ""
+        },
+        {
+            "name": "二级菜单",
+            "submenu": [
+            {
+                "name": "三级菜单",
+                "submenu": [
+                {
+                    "name": "四级菜单",
+                    "url": ""
+                },
+                {
+                    "name": "四级菜单",
+                    "submenu": [
+                    {
+                        "name": "五级菜单",
+                        "url": ""
+                    },
+                    {
+                        "name": "五级菜单",
+                        "url": ""
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                "name": "三级菜单",
+                "url": ""
+            }
+            ]
+        },
+        {
+            "name": "二级菜单",
+            "url": ""
+        }
+        ]
+    },
+    {
+        "name": "一级菜单",
+        "submenu": [
+        {
+            "name": "二级菜单",
+            "url": ""
+        },
+        {
+            "name": "二级菜单",
+            "url": ""
+        },
+        {
+            "name": "百度",
+            "url": "http://www.baidu.com"
+        }
+        ]
+    }
+];
+
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -89,11 +189,13 @@ app.post('/login', urlencodedParser, function(req, res){
     var tasklist = {
         fun1: function(cb, results){
             /* query user from mysql */
-            conn.query('SELECT * from customer where name=\'' + req.body.uname + '\'', function(err, rows, fields) {
+            //conn.query('select * from corp_user where corpid=100001 and username=\"admin\" and passwd=password(\"mdos\")', function(err, rows, fields) {
+            conn.query('SELECT * from corp_user where username=\'' + req.body.uname + '\' and passwd=password(\'' + req.body.passwd + '\')', function(err, rows, fields) {
+            //conn.query('SELECT * from customer where name=\'' + req.body.uname + '\'', function(err, rows, fields) {
                 conn.end();
                 if (err) throw err;
 
-                var ret = (rows[0] != null && rows[0].passwd == req.body.passwd);
+                var ret = (rows[0] != null);
 
                 cb(null, ret);
             });
@@ -134,7 +236,7 @@ app.get('/', function(req, res){
     /* check the session id by redis key */
     client.get(req.session.id, function(err, reply) {
         if (reply != null) {
-            res.render('index', {title:'123', body:'abc'});
+            res.render('index', {menu: JSON.stringify(menuroot), title:'123', body:'abc'});
         }
         else
         {

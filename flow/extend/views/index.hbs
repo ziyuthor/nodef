@@ -11,6 +11,8 @@
 <META name="keywords" content="JSON无限折叠树形菜单特效代码"> 
 <META name="description" content="一款js无限级导航菜单，其一级二级栏目均是用js生成的。很实用，具体效果看演示，一流资源网推荐下载。"> 
 <LINK href="/css/demo.css" rel="stylesheet" type="text/css"> <!--/////////////// head区代码开始16css.com ////////////////////--> 
+<LINK href="/css/menu.css" rel="stylesheet" type="text/css">
+<!--
 <STYLE type="text/css">
 .wrap-menu {float:left; position:relative; left:2px; width:778px; margin:0 auto; overflow:auto; width:300px; background:#F6F6F6; font:12px/1.5 Tahoma,Arial,sans-serif;}
 .wrap-menu ul{ list-style:none; margin:0; padding:0;}
@@ -21,6 +23,7 @@
 .wrap-menu ul li img.unfold{ background-position:0 -9px;}
 .wrap-menu ul li a:hover{ background-color:#ccc; background-image:none;}
 </STYLE>
+-->
 
 <SCRIPT src="/css/jquery.min.js"></SCRIPT>
 
@@ -32,132 +35,26 @@
 <DIV class="democon"><!--////////////////////////////////////// 代码开始 www.16css.com ///////////////////////////////////////--> 
 
 <DIV class="wrap-menu"> </DIV>
-<SCRIPT>
-var testMenu = [
-    {
-        "name": "一级菜单",
-        "submenu": [
-        {
-            "name": "二级菜单",
-            "url": ""
-        },
-        {
-            "name": "二级菜单",
-            "url": ""
-        }
-        ]
-    },
-    {
-        "name": "一级菜单",
-        "submenu": [
-        {
-            "name": "二级菜单",
-            "url": ""
-        },
-        {
-            "name": "二级菜单",
-            "submenu": [
-            {
-                "name": "三级菜单",
-                "submenu": [
-                {
-                    "name": "四级菜单",
-                    "url": ""
-                }
-                ]
-            },
-            {
-                "name": "三级菜单",
-                "url": ""
-            }
-            ]
-        },
-        {
-            "name": "二级菜单",
-            "url": ""
-        },
-        {
-            "name": "二级菜单",
-            "submenu": [
-            {
-                "name": "三级菜单",
-                "submenu": [
-                {
-                    "name": "四级菜单",
-                    "url": ""
-                },
-                {
-                    "name": "四级菜单",
-                    "submenu": [
-                    {
-                        "name": "五级菜单",
-                        "url": ""
-                    },
-                    {
-                        "name": "五级菜单",
-                        "url": ""
-                    }
-                    ]
-                }
-                ]
-            },
-            {
-                "name": "三级菜单",
-                "url": ""
-            }
-            ]
-        },
-        {
-            "name": "二级菜单",
-            "url": ""
-        }
-        ]
-    },
-    {
-        "name": "一级菜单",
-        "submenu": [
-        {
-            "name": "二级菜单",
-            "url": ""
-        },
-        {
-            "name": "二级菜单",
-            "url": ""
-        },
-        {
-            "name": "百度",
-            "url": "http://www.baidu.com"
-        }
-        ]
-    }
-];
 
-$( function(){ new AccordionMenu({menuArrs:testMenu});} );
+<SCRIPT>
+var str = JSON.stringify({{{menu}}});
+$( function(){ new AccordionMenu({menuArrs:JSON.parse(str)});} );
 </SCRIPT>
     <!--////////////////////////////////////// 代码结束 www.16css.com ///////////////////////////////////////--> 
 <STYLE type="text/css">
-.content {float:left; position:relative; left:4px; margin:0 auto; overflow:auto; width:800px; background:steelBlue; font:12px/1.5 Tahoma,Arial,sans-serif;}
+.content {float:left; position:absolute; left:204px; margin:0 auto; overflow:auto; width:800px; background:steelBlue; font:12px/1.5 Tahoma,Arial,sans-serif;}
 </STYLE>
 <DIV class="content">
-<p>1234234234234234</p>
-<p>1</p>
-<p>2</p>
-<p>3</p>
+
 <p>{{{body}}}</p>
-<p>4</p>
-<p>5</p>
-<p>6</p>
+<script>
+var str = JSON.stringify({{{menu}}});
+document.write(str);
+</script>
+
 </DIV>
 </DIV>
 
-<DIV style="display: none;">
-<SCRIPT type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff81c0a22e244e71a1444489aaa8f8420' type='text/javascript'%3E%3C/script%3E"));
-</SCRIPT>
-
-<SCRIPT type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5003180'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5003180%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</SCRIPT>
-</DIV>
 </BODY>
 <p>powered by ut</p>
 </HTML>
