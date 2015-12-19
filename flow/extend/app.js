@@ -29,11 +29,11 @@ var menuroot = [
         "submenu": [
         {
             "name": "系统信息",
-            "url": ""
+            "url": "/systemInfo"
         },
         {
             "name": "账户信息",
-            "url": ""
+            "url": "/accountInfo"
         }
         ]
     },
@@ -42,11 +42,11 @@ var menuroot = [
         "submenu": [
         {
             "name": "单个充值",
-            "url": ""
+            "url": "/charge"
         },
         {
             "name": "批量充值",
-            "url": ""
+            "url": "/multiCharge"
         }
         ]
     },
@@ -55,7 +55,7 @@ var menuroot = [
         "submenu": [
         {
             "name": "订单查询",
-            "url": ""
+            "url": "/queryOrder"
         }
         ]
     },
@@ -64,15 +64,15 @@ var menuroot = [
         "submenu": [
         {
             "name": "企业查询",
-            "url": ""
+            "url": "/queryCrop"
         },
         {
             "name": "新建企业信息",
-            "url": ""
+            "url": "/addCrop"
         },
         {
             "name": "企业信息修改",
-            "url": ""
+            "url": "/modifyCrop"
         }
         ]
     },
@@ -81,15 +81,15 @@ var menuroot = [
         "submenu": [
         {
             "name": "产品信息",
-            "url": ""
+            "url": "/product"
         },
         {
             "name": "产品添加",
-            "url": ""
+            "url": "/addProduct"
         },
         {
             "name": "产品调整",
-            "url": ""
+            "url": "/modifyProduct"
         }
         ]
     },
@@ -98,15 +98,15 @@ var menuroot = [
         "submenu": [
         {
             "name": "流量包查询",
-            "url": ""
+            "url": "/queryPackage"
         },
         {
             "name": "新增流量包",
-            "url": ""
+            "url": "/addPackage"
         },
         {
             "name": "流量包调整",
-            "url": "http://www.baidu.com"
+            "url": "/modifyPackage"
         }
         ]
     },
@@ -115,15 +115,15 @@ var menuroot = [
         "submenu": [
         {
             "name": "通道查询",
-            "url": ""
+            "url": "/queryChannel"
         },
         {
             "name": "新增通道",
-            "url": ""
+            "url": "/addChannel"
         },
         {
             "name": "通道调整",
-            "url": "http://www.baidu.com"
+            "url": "/modifyChannel"
         }
         ]
     },
@@ -132,19 +132,131 @@ var menuroot = [
         "submenu": [
         {
             "name": "用户查询",
-            "url": ""
+            "url": "/queryUser"
         },
         {
             "name": "添加用户",
-            "url": ""
+            "url": "/addUser"
         },
         {
             "name": "删除用户",
-            "url": ""
+            "url": "/deleteUser"
         }
         ]
     }
 ];
+
+var menuadmin = [
+    {
+        "name": "信息管理",
+        "submenu": [
+        {
+            "name": "系统信息",
+            "url": "/systemInfo"
+        },
+        {
+            "name": "账户信息",
+            "url": "/accountInfo"
+        }
+        ]
+    },
+    {
+        "name": "流量充值",
+        "submenu": [
+        {
+            "name": "单个充值",
+            "url": "/charge"
+        },
+        {
+            "name": "批量充值",
+            "url": "/multiCharge"
+        }
+        ]
+    },
+    {
+        "name": "任务管理",
+        "submenu": [
+        {
+            "name": "订单查询",
+            "url": "/queryOrder"
+        }
+        ]
+    },
+    {
+        "name": "用户管理",
+        "submenu": [
+        {
+            "name": "用户查询",
+            "url": "/queryUser"
+        },
+        {
+            "name": "添加用户",
+            "url": "/addUser"
+        },
+        {
+            "name": "删除用户",
+            "url": "/deleteUser"
+        }
+        ]
+    }
+];
+
+var menugeneral = [
+    {
+        "name": "信息管理",
+        "submenu": [
+        {
+            "name": "系统信息",
+            "url": "/systemInfo"
+        },
+        {
+            "name": "账户信息",
+            "url": "/accountInfo"
+        }
+        ]
+    },
+    {
+        "name": "流量充值",
+        "submenu": [
+        {
+            "name": "单个充值",
+            "url": "/charge"
+        },
+        {
+            "name": "批量充值",
+            "url": "/multiCharge"
+        }
+        ]
+    },
+    {
+        "name": "任务管理",
+        "submenu": [
+        {
+            "name": "订单查询",
+            "url": "/queryOrder"
+        }
+        ]
+    },
+    {
+        "name": "用户管理",
+        "submenu": [
+        {
+            "name": "用户查询",
+            "url": "/queryUser"
+        },
+        {
+            "name": "添加用户",
+            "url": "/addUser"
+        },
+        {
+            "name": "删除用户",
+            "url": "/deleteUser"
+        }
+        ]
+    }
+];
+
+var menuTable = [menuroot, menuadmin, menugeneral];
 
 app.use(session({
     secret: 'keyboard cat',
@@ -213,22 +325,19 @@ app.post('/login', urlencodedParser, function(req, res){
     var tasklist = {
         fun1: function(cb, results){
             /* query user from mysql */
-            //conn.query('select * from corp_user where corpid=100001 and username=\"admin\" and passwd=password(\"mdos\")', function(err, rows, fields) {
             conn.query('SELECT * from corp_user where username=\'' + req.body.uname + '\' and passwd=password(\'' + req.body.passwd + '\')', function(err, rows, fields) {
-            //conn.query('SELECT * from customer where name=\'' + req.body.uname + '\'', function(err, rows, fields) {
                 conn.end();
                 if (err) throw err;
 
-                var ret = (rows[0] != null);
-
-                cb(null, ret);
+                cb(null, (rows[0] != null) ? rows[0].privilege : null);
             });
         },
         fun3: ['fun1', function(cb, results){
-            if (results['fun1'])
+            var privilege = results['fun1'];
+            if (privilege != null)
             {
                 /* insert session id in redis */
-                client.send_command("set", [req.session.id, "1"], function(err, reply) {
+                client.send_command("set", [req.session.id, privilege], function(err, reply) {
                     if (reply != null)
                         console.log(reply.toString());
                 });
@@ -239,7 +348,7 @@ app.post('/login', urlencodedParser, function(req, res){
 
                 /* jump to index page */
                 //res.render('index', {title:'123', body:'abc'});
-                res.redirect('/?name=' + req.body.uname);
+                res.redirect('/systemInfo?name=' + req.body.uname);
             }
             else /* query user failed */
             {
@@ -260,7 +369,288 @@ app.get('/', function(req, res){
     /* check the session id by redis key */
     client.get(req.session.id, function(err, reply) {
         if (reply != null) {
-            res.render('index', {menu: JSON.stringify(menuroot), title:'123', body:'abc'});
+            console.log(reply);
+            res.render('index', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'abc'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/systemInfo', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('systemInfo', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'systemInfo'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/accountInfo', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('accountInfo', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'accountInfo'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/charge', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('charge', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'charge'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/multiCharge', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('multiCharge', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'multiCharge'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/queryOrder', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('queryOrder', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'queryOrder'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/queryCrop', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('queryCrop', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'queryCrop'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/addCrop', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('addCrop', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'addCrop'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/modifyCrop', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('modifyCrop', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'modifyCrop'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/product', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('product', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'product'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/addProduct', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('addProduct', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'addProduct'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/modifyProduct', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('modifyProduct', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'modifyProduct'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/queryPackage', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('queryPackage', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'queryPackage'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/addPackage', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('addPackage', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'addPackage'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/modifyPackage', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('modifyPackage', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'modifyPackage'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/queryChannel', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('queryChannel', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'queryChannel'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/addChannel', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('addChannel', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'addChannel'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/modifyChannel', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('modifyChannel', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'modifyChannel'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/queryUser', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('queryUser', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'queryUser'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/addUser', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('addUser', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'addUser'});
+        }
+        else
+        {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/deleteUser', function(req, res){
+    /* check the session id by redis key */
+    client.get(req.session.id, function(err, reply) {
+        if (reply != null) {
+            console.log(reply);
+            res.render('deleteUser', {menu: JSON.stringify(menuTable[reply]), title:'123', body:'deleteUser'});
         }
         else
         {
